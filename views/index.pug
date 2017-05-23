@@ -1,0 +1,271 @@
+include includes/header.pug
+link(type="text/css" rel="stylesheet" href="/css/index.css")
+.container
+  form(method="post", enctype="multipart/form-data", action="/submit", class="form-horizontal",name="formValidate")
+    .form-group.model-control
+      div.modal-title 选择模板
+
+      if modelType == 'model2'
+        div.imgBox.col-sm-1(data-value="model1")
+          img(src="../images/模板一_s.png")
+          div.checkBig 查看大图
+        div.imgBox.col-sm-1.selected(data-value="model2")
+          img(src="../images/模板二_s.png")
+          div.checkBig 查看大图
+        div.imgBox.col-sm-1(data-value="model3")
+          img(src="../images/模板三_s.png")
+          div.checkBig 查看大图
+      else if modelType == 'model3'
+        div.imgBox.col-sm-1(data-value="model1")
+          img(src="../images/模板一_s.png")
+          div.checkBig 查看大图
+        div.imgBox.col-sm-1(data-value="model2")
+          img(src="../images/模板二_s.png")
+          div.checkBig 查看大图
+        div.imgBox.col-sm-1.selected(data-value="model3")
+          img(src="../images/模板三_s.png")
+          div.checkBig 查看大图
+      else
+        div.imgBox.col-sm-1.selected(data-value="model1")
+          img(src="../images/模板一_s.png")
+          div.checkBig 查看大图
+        div.imgBox.col-sm-1(data-value="model2")
+          img(src="../images/模板二_s.png")
+          div.checkBig 查看大图
+        div.imgBox.col-sm-1(data-value="model3")
+          img(src="../images/模板三_s.png")
+          div.checkBig 查看大图
+
+    .form-group#activityArea
+      .row
+        .col-sm-2
+          label 专题名称
+          .input-container
+            input.form-control(type="text" name="activityName" value=((activity || {}).activityName) placeholder="请输入活动名称")
+        .col-sm-2
+          label 页面标题
+          .input-container
+            input.form-control(type="text" name="pageTitle" value=((activity || {}).pageTitle) placeholder="请输入标题")
+        .col-sm-2
+          label 页面背景色
+          .input-container
+            input.form-control(type="text" name="bgColor" value=((activity || {}).bgColor) placeholder="请输入页面背景色")
+        .col-sm-2
+          label 底部背景色
+          .input-container
+            input.form-control(type="text" name="footerBgColor" value=((activity || {}).footerBgColor) placeholder="请输入底部背景色")
+        .input-imgBig(data-type="backgroundImage")
+          .input-container
+            input.file-control(type="file" name="inputFile")
+            if (activity || {}).backgroundImageName
+              input(type="hidden",name="backgroundImage",data-name=activity.backgroundImageName,value=activity.backgroundImagePath)
+              .input-fileBig.pic-file
+                img(src= '../images/' + activity.backgroundImageName)
+            else
+              .input-fileBig.pic-file
+          span 设置广告图
+
+
+    if productInfos1
+      h3.productArea1.productShow 活动1
+        button.btn-add.addProd(type="button", style="float:right")
+      .form-group.product-box.productArea1.productShow
+        each product in productInfos1
+          .product.row
+            .col-sm-2
+              label 产品名称
+              .input-container
+                input.form-control(type="text" name="productName" value=product.productName)
+            .col-sm-1
+              label 产品价格
+              .input-container
+                input.form-control(type="text" name="productPrice" value=product.productPrice)
+            .col-sm-1
+              label 积分价格
+              .input-container
+                input.form-control(type="text" name="integralPrice" value=product.integralPrice)
+            .col-sm-2
+              label 产品链接
+              .input-container
+                input.form-control(type="text" name="productLink" value=product.productLink)
+            .col-sm-3
+              label 产品描述
+              .input-container
+                input.form-control(type="text" name="productDesc" value=product.productDesc)
+            .col-sm-1.input-img(data-type="productImage")
+              .input-container
+                input.form-control(type="file" name="inputFile")
+                if (product || {}).productImageName
+                  input(type="hidden",name="productImage",data-name=product.productImageName,value=product.productImagePath)
+                  .input-file.pic-file
+                    img(src= '../images/' + product.productImageName)
+                else
+                  .input-file.pic-file
+            .col-sm-1.last
+              button.btn.btn-danger.deleteProd.btn-delete(type="button", style="float:right")
+    else if modelType
+      h3.productArea1.productShow(style="display: none;") 活动1
+        button.btn-add.addProd(type="button", style="float:right")
+      .form-group.product-box.productArea1.productShow(style="display: none;")
+        .product.row
+          .col-sm-2
+            label 产品名称
+            .input-container
+              input.form-control(type="text" name="productName")
+          .col-sm-1
+            label 产品价格
+            .input-container
+              input.form-control(type="text" name="productPrice")
+          .col-sm-1
+            label 积分价格
+            .input-container
+              input.form-control(type="text" name="integralPrice")
+          .col-sm-2
+            label 产品链接
+            .input-container
+              input.form-control(type="text" name="productLink")
+          .col-sm-3
+            label 产品描述
+            .input-container
+              input.form-control(type="text" name="productDesc")
+          .col-sm-1.input-img(data-type="productImage")
+            .input-container
+              input.file-control(type="file" name="inputFile")
+              .input-file.pic-file
+          .col-sm-1.last
+            button.btn.btn-danger.deleteProd.btn-delete(type="button", style="float:right")
+    else
+      h3.productArea1.productShow 活动1
+        button.btn-add.addProd(type="button", style="float:right")
+      .form-group.product-box.productArea1.productShow
+        .product.row
+          .col-sm-2
+            label 产品名称
+            .input-container
+              input.form-control(type="text" name="productName")
+          .col-sm-1
+            label 产品价格
+            .input-container
+              input.form-control(type="text" name="productPrice")
+          .col-sm-1
+            label 积分价格
+            .input-container
+              input.form-control(type="text" name="integralPrice")
+          .col-sm-2
+            label 产品链接
+            .input-container
+              input.form-control(type="text" name="productLink")
+          .col-sm-3
+            label 产品描述
+            .input-container
+              input.form-control(type="text" name="productDesc")
+          .col-sm-1.input-img(data-type="productImage")
+            .input-container
+              input.file-control(type="file" name="inputFile")
+              .input-file.pic-file
+          .col-sm-1.last
+            button.btn.btn-danger.deleteProd.btn-delete(type="button", style="float:right")
+
+    if productInfos2
+      h3.productArea2.productShow 活动2
+        button.btn-add.addProd(type="button", style="float:right")
+      .form-group.product-box.productArea2.productShow
+        each product in productInfos2
+          .product.row
+            .col-sm-2
+              label 产品名称
+              .input-container
+                input.form-control(type="text" name="productName" value=product.productName)
+            .col-sm-2
+              label 产品价格
+              .input-container
+                input.form-control(type="text" name="productPrice" value=product.productPrice)
+            .col-sm-2
+              label 积分价格
+              .input-container
+                input.form-control(type="text" name="integralPrice" value=product.integralPrice)
+            .col-sm-3
+              label 产品链接
+              .input-container
+                input.form-control(type="text" name="productLink" value=product.productLink)
+            .col-sm-1.input-img(data-type="productImage")
+              .input-container
+                input.form-control(type="file" name="inputFile")
+                if (product || {}).productImageName
+                  input(type="hidden",name="productImage",data-name=product.productImageName,value=product.productImagePath)
+                  .input-file.pic-file
+                    img(src= '../images/' + product.productImageName)
+                else
+                  .input-file.pic-file
+            .col-sm-1.last
+            button.btn.btn-danger.deleteProd.btn-delete(type="button", style="float:right")
+    else if modelType
+      h3.productArea2.productShow(style="display: none;") 活动2
+        button.btn-add.addProd(type="button", style="float:right")
+      .form-group.product-box.productArea2.productShow(style="display: none;")
+        .product.row
+          .col-sm-2
+            label 产品名称
+            .input-container
+              input.form-control(type="text" name="productName")
+          .col-sm-2
+            label 产品价格
+            .input-container
+              input.form-control(type="text" name="productPrice")
+          .col-sm-2
+            label 积分价格
+            .input-container
+              input.form-control(type="text" name="integralPrice")
+          .col-sm-3
+            label 产品链接
+            .input-container
+              input.form-control(type="text" name="productLink")
+          .col-sm-1.input-img(data-type="productImage")
+            .input-container
+              input.file-control(type="file" name="inputFile")
+              .input-file.pic-file
+          .col-sm-1.last
+            button.btn.btn-danger.deleteProd.btn-delete(type="button", style="float:right")
+    else
+      h3.productArea2.productShow 活动2
+        button.btn-add.addProd(type="button", style="float:right")
+      .form-group.product-box.productArea2.productShow
+        .product.row
+          .col-sm-2
+            label 产品名称
+            .input-container
+              input.form-control(type="text" name="productName")
+          .col-sm-2
+            label 产品价格
+            .input-container
+              input.form-control(type="text" name="productPrice")
+          .col-sm-2
+            label 积分价格
+            .input-container
+              input.form-control(type="text" name="integralPrice")
+          .col-sm-3
+            label 产品链接
+            .input-container
+              input.form-control(type="text" name="productLink")
+          .col-sm-1.input-img(data-type="productImage")
+            .input-container
+              input.file-control(type="file" name="inputFile")
+              .input-file.pic-file
+          .col-sm-1.last
+            button.btn.btn-danger.deleteProd.btn-delete(type="button", style="float:right")
+
+    .subBox
+      button(type="button", class="btn btn-default" id="submitBtn") 提交
+      button(type="reset", class="btn btn-default resetBtn") 重置
+
+.pop
+  .outer
+    .close
+      | x
+    .inner
+      img.model1(src="../images/模板一.png")
+      img.model2(src="../images/模板二.png")
+      img.model3(src="../images/模板三.png")
+
+script(src="/lib/jquery.form.min.js")
+script(src="/js/index.js")

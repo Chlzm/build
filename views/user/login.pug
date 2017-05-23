@@ -1,0 +1,21 @@
+include ../includes/header.pug
+.container
+  form.form-horizontal.form-group.login-box(role="form" action="/users/login" method="post")
+    h5 登录
+    .form-box.mar-top.clearfix
+      label.col-sm-2.control-label(for="userName") 用户名：
+      .col-sm-4
+        input#userName.form-control(type="text" name="username")
+      .col-sm-4
+        span 非常抱歉，您的用户名错误请重新输入!
+    .form-box.clearfix
+      label.col-sm-2.control-label(for="password") 密码：
+      .col-sm-4
+        input#password.form-control(type="password" name="password")
+      .col-sm-4
+        span 非常抱歉，您的密码错误请重新输入!
+    .form-box.clearfix.login-btn
+      .col-sm-offset-2.col-sm-10
+        button(type="submit" class="btn btn-default") 登录
+        button(type="reset" class="btn btn-default reset-btn") 重置
+        a.return-pd(href="/users/findPwd") 找回密码

@@ -1,0 +1,52 @@
+block vars
+doctype html
+html(lang="en-us")
+    head
+        meta(charset="utf-8")
+        //- meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        title #{(activity.activityName + ' - ' || '') + '高顿'}
+        //- meta(name='keywords',content=config.keywords)
+        //- meta(name='description',content=config.description)
+        link(href="/favicon.ico", type="system/assets/images/x-icon")
+        //- CSS
+        link(href='../css/index2.css', rel="stylesheet")
+        block css
+        script(src="http://www.ceair.com/resource4/js/public/jquery-1.8.3.min.js")
+        script(src='../js/index2.min.js')
+
+        block head
+        - var footerBgcolor = activity.footerBgColor || '#363636';
+        style(type="text/css").
+            .bei,.UIFooter{
+                background-color: #{footerBgcolor} !important;
+            }
+    //- HTML BODY
+    body(style='background-color:'+activity.bgColor+';padding-top:0!important;')
+        include ./header.pug
+        #mainContent.main-content
+            .Banner
+                img(src= '../images/' + activity.backgroundImageName style="width:100%")
+            .BodyContent
+                .GoodsArea
+                    each productInfo in productInfos1
+                        .GoodsTop
+                            .GoodsImg
+                                a(href= productInfo.productLink)
+                                    img(src= '../images/' + productInfo.productImageName)
+                            .GoodsInfo
+                                .info #{productInfo.productName}
+                                .price
+                                    p 活动价：
+                                        b #{productInfo.productPrice}
+                                    p 积分价：
+                                        b #{productInfo.integralPrice}
+                                .explain
+                                    p #{productInfo.productDesc}
+
+        include ./footer.pug
+        //- JAVASCRIPT
+
+        //- JS
+
+        block js

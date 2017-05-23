@@ -1,0 +1,97 @@
+include includes/header.pug
+link(href="/css/index_gaodun.css", rel="stylesheet")
+.container
+  form(method="post", enctype="multipart/form-data", action="/submit", class="form-horizontal",name="formValidate")
+    .form-group.model-control
+      div.modal-title 选择模板
+      div.imgBox.col-sm-1.selected(data-value="model4")
+        img(src="../images/模板一_s.png")
+        div.checkBig 查看大图
+
+    .form-group#activityArea
+      .row
+        .col-md-3
+          label 专题名称
+          .input-container
+            input.form-control(type="text" name="activityName" value=((activity || {}).activityName) placeholder="请输入活动名称")
+        .col-md-3
+          label 页面标题
+          .input-container
+            input.form-control(type="text" name="pageTitle" value=((activity || {}).pageTitle) placeholder="请输入标题")
+        .col-md-3
+          label 页面背景色
+          .input-container
+            input.form-control(type="text" name="bgColor" value=((activity || {}).bgColor) placeholder="请输入页面背景色")
+        .col-md-3
+          label 底部背景色
+          .input-container
+            input.form-control(type="text" name="footerBgColor" value=((activity || {}).footerBgColor) placeholder="请输入底部背景色")
+
+    .form-group#bannerArea
+      .row
+        .col-sm-4
+          .input-imgBig(data-type="backgroundImage")
+            .input-container
+              input.file-control(type="file" name="inputFile")
+              if (activity || {}).backgroundImageName
+                input(type="hidden",name="backgroundImage",data-name=activity.backgroundImageName,value=activity.backgroundImagePath)
+                .input-fileBig.pic-file
+                  img(src= '../images/' + activity.backgroundImageName)
+              else
+                .input-fileBig.pic-file
+            span 设置广告图
+        .col-sm-4
+          .input-imgBig(data-type="backgroundImage")
+            .input-container
+              input.file-control(type="file" name="inputFile")
+              if (activity || {}).backgroundImageName
+                input(type="hidden",name="backgroundImage",data-name=activity.backgroundImageName,value=activity.backgroundImagePath)
+                .input-fileBig.pic-file
+                  img(src= '../images/' + activity.backgroundImageName)
+              else
+                .input-fileBig.pic-file
+            span 设置广告图
+        .col-sm-4
+          .input-imgBig(data-type="backgroundImage")
+            .input-container
+              input.file-control(type="file" name="inputFile")
+              if (activity || {}).backgroundImageName
+                input(type="hidden",name="backgroundImage",data-name=activity.backgroundImageName,value=activity.backgroundImagePath)
+                .input-fileBig.pic-file
+                  img(src= '../images/' + activity.backgroundImageName)
+              else
+                .input-fileBig.pic-file
+            span 设置广告图
+    h3.productArea1.productShow 课程包
+      button.btn-add.addProd(type="button", style="float:right")
+    .form-group.product-box.productArea1.productShow
+      .product.row
+        .col-sm-3
+          label 课程包ID
+          .input-container
+            input.form-control(type="text" name="classPackageID")
+        .col-sm-3
+          label 展示的课程数量
+          .input-container
+            input.form-control(type="text" name="showNumber")
+        .col-sm-3.input-img(data-type="classBackgroundImage")
+          .input-container
+            input.file-control(type="file" name="inputFile")
+            .input-file.pic-file
+        .col-sm-1.last
+          button.btn.btn-danger.deleteProd.btn-delete(type="button", style="float:right")
+    .subBox
+      button(type="button", class="btn btn-default" id="submitBtn") 提交
+      button(type="reset", class="btn btn-default resetBtn") 重置
+
+.pop
+  .outer
+    .close
+      | x
+    .inner
+      img.model1(src="../images/模板一.png")
+      img.model2(src="../images/模板二.png")
+      img.model3(src="../images/模板三.png")
+
+script(src="/lib/jquery.form.min.js")
+script(src="/js/index_gaodun.js")

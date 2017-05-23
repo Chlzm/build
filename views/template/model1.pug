@@ -1,0 +1,65 @@
+block vars
+doctype html
+html(lang="en-us")
+    head
+        meta(charset="utf-8")
+        //- meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        title #{(activity.activityName + ' - ' || '') + '高顿'}
+        //- meta(name='keywords',content=config.keywords)
+        //- meta(name='description',content=config.description)
+        link(href="/favicon.ico", type="system/assets/images/x-icon")
+        //- CSS
+        link(href='../css/index1.css', rel="stylesheet")
+        block css
+        script(src="http://www.ceair.com/resource4/js/public/jquery-1.8.3.min.js")
+        script(src='../js/index1.min.js')
+        block head
+        - var footerBgcolor = activity.footerBgColor || '#363636';
+        style(type="text/css").
+            .bei, .UIFooter {
+                background-color: footerBgcolor !important;
+            }
+    //- HTML BODY
+
+    body(style='background-color:'+activity.bgColor+';padding-top:0!important;')
+        include ./header.pug
+        #mainContent.main-content
+            .Banner
+                img(src= '../images/' + activity.backgroundImageName style="width:100%")
+            .BodyContent
+                .GoodsArea
+                    each productInfos in productInfos0
+                        .GoodsTop
+                            .GoodsImg
+                                a(href= productInfos.products1.productLink)
+                                    img(src= '../images/' + productInfos.products1.productImageName)
+                            .GoodsInfo
+                                .info #{productInfos.products1.productName}
+                                .price
+                                    p 活动价：
+                                        b #{productInfos.products1.productPrice}
+                                    p 积分价：
+                                        b #{productInfos.products1.integralPrice}
+                                .explain
+                                    p #{productInfos.products1.productDesc}
+                        .GoodsBottom
+                            each products2 in productInfos.products2
+                                .Goods
+                                    .ImgGoods
+                                        a(href= products2.productLink)
+                                            img(src= '../images/' + products2.productImageName)
+                                        .ImgInfo
+                                            .InfoContent #{products2.productName}
+                                            .InfoPrice
+                                                p 活动价：
+                                                    b #{products2.productPrice}
+                                                p 积分价：
+                                                    b #{products2.integralPrice}
+
+        include ./footer.pug
+        //- JAVASCRIPT
+
+        //- JS
+
+        block js

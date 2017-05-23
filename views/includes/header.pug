@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title 模板
+    link(href="/css/bootstrap.min.css", rel="stylesheet")
+    script(src="/lib/jquery.min.js")
+    script(src="/lib/bootstrap.min.js")
+    script(src="/lib/layer.js")
+  body
+    nav(class="navbar navbar-default", role="navigation")
+      .container
+        a.navbar-brand(href="/")
+          img(src="/images/logo.png")
+        ul.nav.navbar-nav.navbar-right
+          if !user
+            li
+              a(href="/users/reg") 注册
+            li
+              a(href="/users/login") 登录
+          else
+            li
+              a(href="/pagelist") 列表
+            li
+              a(href="/users/logout") 退出
+    .container.text-center
+      if success
+        .alert.alert-success #{success}
+      if error
+        .alert.alert-danger #{error}
